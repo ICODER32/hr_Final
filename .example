@@ -1,0 +1,3 @@
+MONGO_URI=mongodb+srv://m001-student:Ibtisam@sandbox.xuwkkn8.mongodb.net/HR_Conceirge?retryWrites=true&w=majority
+JWT_SECRET=secret
+CLIENT_URL=http://localhost:5000
