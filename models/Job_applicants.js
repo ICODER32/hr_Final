@@ -33,6 +33,10 @@ const applicantSchema = new mongoose.Schema({
     type: Date,
     required: true,
   },
+  gender: {
+    type: String,
+    required: true,
+  },
   education: {
     type: String,
     required: true,
