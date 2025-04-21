@@ -49,6 +49,13 @@ router.post("/", async (req, res) => {
       availability,
       expertise,
     });
+    // if phone or email already exists, return error
+    const existingApplicant = await Applicant.findOne({
+      $or: [{ phone }, { email }],
+    });
+    if (existingApplicant) {
+      return res.status(400).send("Phone or email already exists");
+    }
     await applicant.save();
     res.status(201).send(applicant);
   } catch (error) {
