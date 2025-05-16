@@ -56,11 +56,13 @@ router.post("/", async (req, res) => {
       $or: [{ phone }, { email }],
     });
     if (existingApplicant) {
+      console.log(existingApplicant);
       return res.status(400).send("Phone or email already exists");
     }
     await applicant.save();
     res.status(201).send(applicant);
   } catch (error) {
+    console.log(error);
     res.status(400).send(error);
   }
 });
