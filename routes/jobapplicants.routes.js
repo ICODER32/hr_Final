@@ -97,13 +97,8 @@ router.post("/:jobId", upload.single("resume"), async (req, res) => {
       applicationDate: Date.now(),
     });
 
-    // if phone or email already exists, return error
-    const existingApplicant = await Applicant.findOne({
-      $or: [{ phone }, { email }],
-    });
-    if (existingApplicant) {
-      return res.status(400).send("Phone or email already exists");
-    }
+    // if phone or email already exists, return error on same job
+
     // Save the applicant
     await applicant.save();
 
