@@ -33,7 +33,6 @@ const applicantSchema = new mongoose.Schema({
   militaryDetails: militaryDetailsSchema,
   domicile: {
     type: String,
-    required: true,
   },
   address: {
     village: String,
