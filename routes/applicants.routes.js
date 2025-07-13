@@ -63,6 +63,7 @@ router.post("/", async (req, res) => {
     res.status(201).send(applicant);
   } catch (error) {
     console.log(error);
+    console.log(error);
     res.status(400).send(error);
   }
 });

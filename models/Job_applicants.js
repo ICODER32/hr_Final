@@ -43,8 +43,7 @@ const applicantSchema = new mongoose.Schema({
   },
   category: {
     type: String,
-    enum: ["civilian", "retired"],
-    required: true,
+    default: "",
   },
   militaryDetails: militaryDetailsSchema,
   domicile: {
