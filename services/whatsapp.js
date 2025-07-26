@@ -1,6 +1,7 @@
 // services/whatsapp.js
 const { Client, LocalAuth } = require("whatsapp-web.js");
 const qrcode = require("qrcode");
+const puppeteer = require("puppeteer");
 
 let clientReady = false;
 let qrCodeImage = "";
@@ -10,6 +11,7 @@ const client = new Client({
   puppeteer: {
     headless: true,
     args: ["--no-sandbox", "--disable-setuid-sandbox"],
+    executablePath: puppeteer.executablePath(), // this is key!
   },
 });
 
