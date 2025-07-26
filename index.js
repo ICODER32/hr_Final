@@ -15,9 +15,9 @@ app.use("/api/queries", require("./routes/query.routes"));
 
 app.use("/api/whatsapp", require("./routes/whatsapp.routes"));
 
-app.get("/download", (req, res) => {
-  res.download(__dirname + "/myfolder.zip");
-});
+// app.get("/download", (req, res) => {
+//   res.download(__dirname + "/myfolder.zip");
+// });
 
 app.get("*", (req, res) => {
   res.sendFile(path.join(__dirname, "dist", "index.html"));
