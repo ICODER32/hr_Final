@@ -13,7 +13,7 @@ app.use("/api/jobs", require("./routes/jobs.routes"));
 app.use("/api/jobApplicants", require("./routes/jobapplicants.routes"));
 app.use("/api/queries", require("./routes/query.routes"));
 
-app.use("/api/whatsapp", require("./routes/whatsapp.routes"));
+// app.use("/api/whatsapp", require("./routes/whatsapp.routes"));
 
 // app.get("/download", (req, res) => {
 //   res.download(__dirname + "/myfolder.zip");
