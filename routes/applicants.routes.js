@@ -28,6 +28,9 @@ router.post("/", async (req, res) => {
   } = req.body;
   try {
     const militaryDetails = { rank, service, trade };
+    if (district.length == 0) {
+      district = "online";
+    }
     const address = {
       village,
       ucNumber,
