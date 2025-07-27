@@ -4,7 +4,7 @@ const router = express.Router();
 
 // create an applicant
 router.post("/", async (req, res) => {
-  const {
+  let {
     phone,
     email,
     name,
