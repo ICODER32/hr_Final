@@ -37,6 +37,7 @@ router.post("/", async (req, res) => {
       colony,
       tehsil,
     };
+
     const applicant = new Applicant({
       name,
       phone,
