@@ -37,6 +37,11 @@ router.post("/", async (req, res) => {
       colony,
       tehsil,
     };
+    const user = await Applicant.find({ phone, email });
+    // user can do two registrations with same phone or email one onsite job and one online job
+    if (user.length > 2) {
+      return res.status(400).send("You can only register for two jobs");
+    }
 
     const applicant = new Applicant({
       name,

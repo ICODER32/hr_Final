@@ -54,11 +54,9 @@ const applicantSchema = new mongoose.Schema({
   phone: {
     type: String,
     required: true,
-    unique: true,
   },
   email: {
     type: String,
-    unique: true,
   },
   createdAt: {
     type: Date,
