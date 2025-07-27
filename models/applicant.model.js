@@ -43,7 +43,6 @@ const applicantSchema = new mongoose.Schema({
     tehsil: String,
     district: {
       type: String,
-      required: true,
       default: "online",
     },
   },
