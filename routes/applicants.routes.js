@@ -26,11 +26,19 @@ router.post("/", async (req, res) => {
     availability,
     expertise,
   } = req.body;
+
   try {
-    const militaryDetails = { rank, service, trade };
-    if (district.length == 0) {
-      district = "online";
+    // Normalize district input
+    if (Array.isArray(district)) {
+      district = district[0]; // Take first element if array
     }
+    if (!district || district.trim() === "") {
+      district = "online";
+    } else {
+      district = district.trim();
+    }
+
+    const militaryDetails = { rank, service, trade };
     const address = {
       village,
       ucNumber,
@@ -40,12 +48,35 @@ router.post("/", async (req, res) => {
       colony,
       tehsil,
     };
-    const user = await Applicant.find({ phone, email });
-    // user can do two registrations with same phone or email one onsite job and one online job
-    if (user.length > 2) {
-      return res.status(400).send("You can only register for two jobs");
+
+    // Find existing registrations for this user
+    const existingApplicants = await Applicant.find({ phone, email });
+
+    // Determine job type for current registration
+    const isOnlineJob = district === "online";
+
+    // Check registration limits
+    if (existingApplicants.length >= 2) {
+      return res
+        .status(400)
+        .send("Maximum of two registrations allowed (one online, one onsite)");
     }
 
+    // Check if user already has this job type registered
+    const hasExistingJobType = existingApplicants.some((applicant) =>
+      isOnlineJob
+        ? applicant.address.district === "online"
+        : applicant.address.district !== "online"
+    );
+
+    if (hasExistingJobType) {
+      const jobType = isOnlineJob ? "online" : "onsite";
+      return res
+        .status(400)
+        .send(`You already have a ${jobType} job registration`);
+    }
+
+    // Create new applicant
     const applicant = new Applicant({
       name,
       phone,
@@ -64,9 +95,8 @@ router.post("/", async (req, res) => {
     await applicant.save();
     res.status(201).send(applicant);
   } catch (error) {
-    console.log(error);
-    console.log(error);
-    res.status(400).send(error);
+    console.error("Registration error:", error);
+    res.status(400).send(error.message || "Registration failed");
   }
 });
 // get all applicants

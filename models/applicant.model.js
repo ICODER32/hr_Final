@@ -1,4 +1,3 @@
-const e = require("express");
 const express = require("express");
 const mongoose = require("mongoose");
 
@@ -52,11 +51,12 @@ const applicantSchema = new mongoose.Schema({
     required: true,
   },
   phone: {
-    type: String,
+    type: Number,
     required: true,
   },
   email: {
     type: String,
+    unique: false,
   },
   createdAt: {
     type: Date,
